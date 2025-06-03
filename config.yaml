@@ -1,0 +1,5 @@
+MODEL_NAME: "deepseek/deepseek-chat"
+BACKUP_MODEL_NAME: "gpt-4o-mini"
+
+VERIFY_MODEL_NAME: "deepseek/deepseek-reasoner"
+BACKUP_VERIFY_MODEL_NAME: "o4-mini"
