@@ -4,6 +4,8 @@
 
 A modular and automated financial analysis tool designed for comprehensive topic investigation using Large Language Models (LLMs), dynamic planning, tool integration (web search, code execution), and multi-stage report generation. Built with LangGraph for structured, dynamic execution.
 
+This is a follow-up project to Report-Summarizer (https://github.com/Johnny95420/Report-Summarizer). While Report-Summarizer can generate broad reports, it might lack depth when addressing specific questions. Therefore, the purpose of this project is to conduct in-depth research and provide supplementary information for specific sections after Report-Summarizer has finished its execution.
+
 ---
 
 ## 🚀 Features
