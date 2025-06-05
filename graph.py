@@ -161,10 +161,6 @@ def route_model_output(
     state: State, config: RunnableConfig
 ) -> Literal["__end__", "tools"]:
     last_message = state.messages[-1]
-    print(last_message)
-    if "run_python" in last_message.content:
-        print("========miss tool use=========")
-        print(last_message)
     if not isinstance(last_message, AIMessage):
         raise ValueError(
             f"Expected AIMessage in output edges, but got {type(last_message).__name__}"
@@ -465,6 +461,7 @@ builder.add_node("write_report", write_report)
 builder.add_edge(START, "generate_answering_plan")
 builder.add_edge("generate_answering_plan", "execute_plan")
 builder.add_edge("execute_plan", "validate_plan")
+builder.add_edge("write_report", END)
 checkpointer = InMemorySaver()
 graph = builder.compile(checkpointer=checkpointer)
 # %%
