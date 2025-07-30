@@ -123,30 +123,32 @@ def queries_formatter(thought: str, queries: List[str]):
 
 @tool
 def validate_formatter(done: bool, new_plan: List[str]):
-    """Summary
-    if the information of the topic is enough (do not need to regenerate step by step plan)
-    done = True
-    new_plan = []
-    else
-    done = False
-    new_plan = [step1 plan, step2 plan, ......]
+    """Format validation result for planning steps.
 
     Args:
-        done (bool): True: need to re-generate step by step plan, False: the information completed enough can generate report
-        new_plan (List[str]):  new step by step plan
+        done: ``True`` when additional planning is unnecessary.
+        new_plan: Newly generated step-by-step plan when ``done`` is ``False``.
 
+    Returns:
+        dict: Dictionary containing ``done`` and ``new_plan`` keys.
     """
+    return {"done": done, "new_plan": new_plan}
 
 
 @tool
 def feedback_formatter(grade: Literal["pass", "fail"], follow_up_queries: List[str]):
-    """Summary
-    Take grad and follow up queries convert them into Feedback object
+    """Format feedback from a verification step.
+
     Args:
-        grade (Literal[pass,fail]): Evaluation result indicating whether the response meets requirements ('pass') or needs revision ('fail').
-        follow_up_squeries (List[str]): List of follow-up search queries.
+        grade: Evaluation result indicating whether the response meets
+            requirements ("pass") or needs revision ("fail").
+        follow_up_queries: List of follow-up search queries when ``grade`` is
+            "fail".
+
+    Returns:
+        dict: Dictionary containing ``grade`` and ``follow_up_queries`` keys.
     """
-    ...
+    return {"grade": grade, "follow_up_queries": follow_up_queries}
 
 
 @tool

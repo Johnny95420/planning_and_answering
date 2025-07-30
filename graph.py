@@ -72,9 +72,7 @@ def call_llm(prompt: List, tool=None, tool_choice=None):
 
 def call_thinking_llm(prompt: List):
     temperature = (
-        1
-        if VERIFY_MODEL_NAME.startswith("o3") or VERIFY_MODEL_NAME.startswith("o4")
-        else 0
+        1 if VERIFY_MODEL_NAME.startswith("o3") or VERIFY_MODEL_NAME.startswith("o4") else 0
     )
     try:
         model = ChatLiteLLM(model=VERIFY_MODEL_NAME, temperature=temperature)
@@ -112,9 +110,7 @@ def call_model(state: State, config: RunnableConfig) -> Dict[str, List[AIMessage
             conversation += str(message)
         prev_idx = len(state.messages)
 
-        compress_prompt = react_compress_prompt.format(
-            topic=topic, conversation=conversation
-        )
+        compress_prompt = react_compress_prompt.format(topic=topic, conversation=conversation)
         response = call_llm(
             prompt=[
                 SystemMessage(content=compress_prompt),
@@ -157,9 +153,7 @@ def call_model(state: State, config: RunnableConfig) -> Dict[str, List[AIMessage
     }
 
 
-def route_model_output(
-    state: State, config: RunnableConfig
-) -> Literal["__end__", "tools"]:
+def route_model_output(state: State, config: RunnableConfig) -> Literal["__end__", "tools"]:
     last_message = state.messages[-1]
     if not isinstance(last_message, AIMessage):
         raise ValueError(
@@ -332,11 +326,7 @@ async def execute_plan(state: QuestionState, config: RunnableConfig):
     )
     results = call_llm(
         [SystemMessage(content=information_query)]
-        + [
-            HumanMessage(
-                content="Generate queries that will help with solving current step."
-            )
-        ],
+        + [HumanMessage(content="Generate queries that will help with solving current step.")],
         tool=[queries_formatter],
         tool_choice="required",
     )
@@ -446,9 +436,7 @@ def validate_plan(state: QuestionState, config: RunnableConfig):
         )
 
     else:
-        return Command(
-            goto="write_reprot", update={"plan_solving_iterations": num_iterations + 1}
-        )
+        return Command(goto="write_report", update={"plan_solving_iterations": num_iterations + 1})
 
 
 # %%
